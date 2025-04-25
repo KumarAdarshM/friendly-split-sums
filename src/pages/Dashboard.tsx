@@ -1,0 +1,45 @@
+
+import React, { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ExpenseForm from "@/components/ExpenseForm";
+import ExpenseHistory from "@/components/ExpenseHistory";
+import FriendsList from "@/components/FriendsList";
+import BalanceSummary from "@/components/BalanceSummary";
+
+const Dashboard: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("expenses");
+  
+  return (
+    <div className="container mx-auto p-4">
+      <header className="text-center my-8">
+        <h1 className="text-4xl font-bold text-app-purple">FriendlySplit</h1>
+        <p className="text-gray-600 mt-2">Track expenses and split bills with friends</p>
+      </header>
+
+      <div className="mb-6">
+        <Tabs defaultValue="expenses" value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid grid-cols-3 mb-8">
+            <TabsTrigger value="expenses">Expenses</TabsTrigger>
+            <TabsTrigger value="balances">Balances</TabsTrigger>
+            <TabsTrigger value="friends">Friends</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="expenses" className="space-y-6">
+            <ExpenseForm />
+            <ExpenseHistory />
+          </TabsContent>
+          
+          <TabsContent value="balances">
+            <BalanceSummary />
+          </TabsContent>
+          
+          <TabsContent value="friends">
+            <FriendsList />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
